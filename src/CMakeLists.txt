@@ -46,7 +46,5 @@ add_library(swamp_gameplay_lib
         ${lib_src}
         )
 
-find_package(glfw3 3.3 REQUIRED)
-
 target_link_libraries(swamp_gameplay_lib m)
 target_link_libraries(swamp_gameplay_lib -fsanitize=address)
