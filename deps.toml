@@ -1,0 +1,12 @@
+depsversion = "0.0.0"
+
+name = "piot/swamp-gameplay"
+version = "0.0.0"
+
+[[dependencies]]
+name = 'piot/swamp-script-scope'
+version = "*"
+
+[[dependencies]]
+name = 'piot/imprint'
+version = "*"
