@@ -9,7 +9,7 @@
 #include <swamp-script-scope/script_scope.h>
 
 struct ImprintMemory;
-struct burst_file_loader;
+struct BurstFileLoader;
 
 typedef uint32_t SwampGameplayStepId;
 typedef uint32_t SwampGameplayStateId;
