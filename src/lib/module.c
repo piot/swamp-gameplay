@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 #include <burst/burst_file_loader.h>
 #include <clog/clog.h>
-#include <imprint/memory.h>
 #include <swamp-dump/dump_ascii.h>
 #include <swamp-gameplay/module.h>
 
@@ -75,7 +74,7 @@ const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, S
         return 0;
     }
 
-#if 0
+#if 1
     swampScriptStateDebugOutput(playerInputState, "updater. input");
     swampScriptStateDebugOutput(&self->gameplayScriptScope->lastState, "updater. Last state");
 #endif
