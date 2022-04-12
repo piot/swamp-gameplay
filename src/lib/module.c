@@ -74,7 +74,7 @@ const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, S
         return 0;
     }
 
-#if 1
+#if CONFIGURATION_DEBUG && 0
     swampScriptStateDebugOutput(playerInputState, "updater. input");
     swampScriptStateDebugOutput(&self->gameplayScriptScope->lastState, "updater. Last state");
 #endif
