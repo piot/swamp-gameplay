@@ -63,6 +63,8 @@ int swampGameplayUpdaterInit(SwampGameplayUpdater* self, SwampScriptScope* gamep
     return 1;
 }
 
+#define BENCHMARK 0
+
 const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, SwampGameplayStepId inputForStateWithStepId, const SwampScriptState* playerInputState)
 {
     if (!self->gameplayScriptScope->staticCode->updateFn) {
@@ -73,6 +75,10 @@ const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, S
         CLOG_ERROR("you can not feed some other input into the updater. expected %08X and received %08X", self->stepId, inputForStateWithStepId);
         return 0;
     }
+
+#if BENCHMARK
+    MonotonicTimeNanoseconds gameplayUpdateBefore = monotonicTimeNanosecondsNow();
+#endif
 
 #if CONFIGURATION_DEBUG && 0
     swampScriptStateDebugOutput(playerInputState, "updater. input");
@@ -109,6 +115,11 @@ const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, S
 
     self->stepId++;
 
+#if BENCHMARK
+    MonotonicTimeNanoseconds gameplayUpdateAfter = monotonicTimeNanosecondsNow();
+    CLOG_OUTPUT_STDERR("gameplay update %d ns %d ms", gameplayUpdateAfter - gameplayUpdateBefore, MONOTONIC_NS_TO_MS(gameplayUpdateAfter-gameplayUpdateBefore))
+#endif
+
     if (self->showDebugOutput) {
         swampScriptStateDebugOutput(&self->gameplayScriptScope->lastState, "swampGameplayUpdaterUpdate");
     }
@@ -117,6 +128,8 @@ const SwampScriptState* swampGameplayUpdaterUpdate(SwampGameplayUpdater* self, S
         //swampScriptStateDebugOutput(self->gameplayState, "game state");
     }
     self->debugCounter++;
+
+
 
     return &self->gameplayScriptScope->lastState;
 }
